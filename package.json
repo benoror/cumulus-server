@@ -1,0 +1,25 @@
+{
+  "name": "cumulus-server",
+  "version": "0.0.1",
+  "description": "Cumulus Server",
+  "main": "server.js",
+  "author": "Ben Orozco <benoror@gmail.com>",
+  "license": "PENDING",
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node -e js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.2",
+    "graphql": "^0.10.1",
+    "graphql-server-express": "^0.8.0",
+    "graphql-tools": "^1.0.0"
+  }
+}
