@@ -9,11 +9,12 @@ const PORT = 4000;
 const server = express();
 
 server.use('/graphql', bodyParser.json(), graphqlExpress({
-  schema
+  schema,
+  context: {},
 }));
 
 server.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql'
+  endpointURL: '/graphql'
 }));
 
-server.listen(PORT, () => console.log(`GraphQL Server is now running on http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`GraphQL Server is now running on http://localhost:${PORT}/graphql`));
