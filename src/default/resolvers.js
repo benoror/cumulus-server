@@ -6,12 +6,6 @@ const resolvers = {
       return Patient.find(args);
     }
   },
-  Patient: {
-    insurance: (_, args) => _.insurance || null
-  },
-  Insurance: {
-    claim: (_, args) => _.claim || null
-  },
 };
 
 export default resolvers;

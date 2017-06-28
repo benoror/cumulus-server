@@ -64,7 +64,7 @@ schema {
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-  allowUndefinedInResolve: false,
+  allowUndefinedInResolve: true,
   printErrors: true,
 });
 
