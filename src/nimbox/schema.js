@@ -1,32 +1,13 @@
-import { makeExecutableSchema, addMockFunctionsToSchema, } from 'graphql-tools';
-import { resolvers } from './resolvers';
+import { makeExecutableSchema } from 'graphql-tools';
+import resolvers from './resolvers';
 
 const typeDefs = `
-type Patient {
-  _id: ID!
-  identityNumber: String!
-  firstName: String!
-  lastName: String!
-  email: String!
-  phone: String
-  phoneAlt: String
-  # dateOfBirth: Date
-  gender: String
-  address: String
-  address2: String
-  zipcode: Int
-  city: String
-  state: String
-  country: String
-  # insurance: Insurance
-}
-
 type Insurance {
   file: String
   name: String
   plan: String
   type: String
-  taxed: String
+  taxed: Boolean
   number: String
   claimRisk: String
   claimFolio: String
@@ -43,6 +24,25 @@ type Insurance {
   claimDepartureDate: String
   claimInstitutionName: String
   claimInstitutionAddress: String
+}
+
+type Patient {
+  _id: ID!
+  identityNumber: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  phoneAlt: String
+  # dateOfBirth: Date
+  gender: String
+  address: String
+  address2: String
+  zipcode: Int
+  city: String
+  state: String
+  country: String
+  insuranceAttributes: Insurance
 }
 
 # type Event {
@@ -64,6 +64,5 @@ const schema = makeExecutableSchema({
   printErrors: true,
 });
 
-// addMockFunctionsToSchema({ schema });
+export default schema;
 
-export { schema };

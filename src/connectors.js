@@ -2,6 +2,34 @@ import Mongoose from 'mongoose';
 
 const mongo = Mongoose.connect('mongodb://localhost/cumulus');
 
+const ClaimSchema = Mongoose.Schema({
+  risk: String,
+  folio: String,
+  number: String,
+  adjuster: String,
+  movement: String,
+  birthplace: String,
+  issueDate: String,
+  occupation: String,
+  initialDate: String,
+  insuredName: String,
+  sinisterDate: String,
+  admissionDate: String,
+  departureDate: String,
+  institutionName: String,
+  institutionAddress: String,
+});
+
+const InsuranceSchema = Mongoose.Schema({
+  file: String,
+  name: String,
+  plan: String,
+  type: String,
+  taxed: Boolean,
+  number: String,
+  claim: ClaimSchema,
+});
+
 const PatientSchema = Mongoose.Schema({
   _id: Mongoose.Schema.Types.ObjectId,
   identityNumber: String,
@@ -18,7 +46,7 @@ const PatientSchema = Mongoose.Schema({
   city: String,
   state: String,
   country: String,
-  // insurance: Insurance
+  insurance: InsuranceSchema
 });
 
 const Patient = Mongoose.model('patients', PatientSchema);
