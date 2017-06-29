@@ -1,5 +1,4 @@
 export default `
-  _id: ID!
   identityNumber: String!
   firstName: String!
   lastName: String!

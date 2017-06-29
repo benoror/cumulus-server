@@ -4,7 +4,6 @@ import resolvers from './resolvers';
 import Patient from './types/patient';
 import Insurance from './types/insurance';
 import Claim from './types/claim';
-import AddPatient from './types/add-patient';
 
 const typeDefs = [`
 schema {
@@ -17,10 +16,13 @@ type Query {
 }
 
 type Mutation {
-  ${AddPatient}
+  upsertPatient (
+    ${Patient}
+  ): Patient
 }
 
 type Patient {
+  _id: ID!
   ${Patient}
   insurance: Insurance
 }
