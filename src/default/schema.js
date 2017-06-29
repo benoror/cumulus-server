@@ -15,12 +15,6 @@ type Query {
   patients: [Patient]
 }
 
-type Mutation {
-  upsertPatient (
-    ${Patient}
-  ): Patient
-}
-
 type Patient {
   _id: ID!
   ${Patient}
@@ -33,6 +27,22 @@ type Insurance {
 }
 
 type Claim {
+  ${Claim}
+}
+
+type Mutation {
+  upsertPatient (
+    ${Patient}
+    insurance: InsuranceInput
+  ): Patient
+}
+
+input InsuranceInput {
+  ${Insurance}
+  claim: ClaimInput
+}
+
+input ClaimInput {
   ${Claim}
 }
 `];
