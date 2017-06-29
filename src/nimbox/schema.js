@@ -7,6 +7,7 @@ import Insurance from './types/insurance';
 const typeDefs = [`
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type Query {
@@ -14,11 +15,23 @@ type Query {
 }
 
 type Patient {
+  _id: ID!
   ${Patient}
   insuranceAttributes: Insurance
 }
 
 type Insurance {
+  ${Insurance}
+}
+
+type Mutation {
+  upsertPatient (
+    ${Patient}
+    insurance: InsuranceInput
+  ): Patient
+}
+
+input InsuranceInput {
   ${Insurance}
 }
 `];
