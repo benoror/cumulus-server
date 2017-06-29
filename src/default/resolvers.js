@@ -7,8 +7,17 @@ const resolvers = {
     }
   },
   Mutation: {
-    addPatient: (_, args) => {
-      return Patient.create(args);
+    upsertPatient: (_, args) => {
+      return Patient.findOneAndUpdate(
+        {
+          identityNumber: args.identityNumber
+        },
+        args,
+        {
+          new: true,
+          upsert: true
+        }
+      );
     },
   },
 };

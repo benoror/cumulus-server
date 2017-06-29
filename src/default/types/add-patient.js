@@ -1,5 +1,8 @@
 export default `
-  addPatient (
+  upsertPatient (
     identityNumber: String!
+    firstName: String!
+    lastName: String!
+    email: String!
   ): Patient
 `;
