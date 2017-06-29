@@ -4,14 +4,20 @@ import resolvers from './resolvers';
 import Patient from './types/patient';
 import Insurance from './types/insurance';
 import Claim from './types/claim';
+import AddPatient from './types/add-patient';
 
 const typeDefs = [`
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type Query {
   patients: [Patient]
+}
+
+type Mutation {
+  ${AddPatient}
 }
 
 type Patient {

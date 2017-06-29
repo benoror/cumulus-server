@@ -31,7 +31,6 @@ const InsuranceSchema = Mongoose.Schema({
 });
 
 const PatientSchema = Mongoose.Schema({
-  _id: Mongoose.Schema.Types.ObjectId,
   identityNumber: String,
   firstName: String,
   lastName: String,
