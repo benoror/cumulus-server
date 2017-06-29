@@ -27,7 +27,7 @@ type Insurance {
 type Mutation {
   upsertPatient (
     ${Patient}
-    insurance: InsuranceInput
+    insuranceAttributes: InsuranceInput
   ): Patient
 }
 
