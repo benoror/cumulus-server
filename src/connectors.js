@@ -31,10 +31,12 @@ const InsuranceSchema = Mongoose.Schema({
 });
 
 const PatientSchema = Mongoose.Schema({
-  identityNumber: String,
-  firstName: String,
-  lastName: String,
-  email: String,
+  createdAt: Date,
+  modifiedAt: Date,
+  identityNumber: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
   phone: String,
   phoneAlt: String,
   // dateOfBirth: Date,
