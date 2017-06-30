@@ -31,8 +31,6 @@ const InsuranceSchema = Mongoose.Schema({
 });
 
 const PatientSchema = Mongoose.Schema({
-  createdAt: Date,
-  modifiedAt: Date,
   identityNumber: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -48,6 +46,8 @@ const PatientSchema = Mongoose.Schema({
   state: String,
   country: String,
   insurance: InsuranceSchema
+}, {
+  timestamps: true
 });
 
 const Patient = Mongoose.model('patients', PatientSchema);

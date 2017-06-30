@@ -1,5 +1,4 @@
 import { Patient } from '../connectors';
-import lodash from 'lodash';
 
 const resolvers = {
   Query: {
@@ -13,9 +12,7 @@ const resolvers = {
         {
           identityNumber: args.identityNumber
         },
-        lodash.assign(args, {
-          modifiedAt: Date.now(),
-        }),
+        args,
         {
           new: true,
           upsert: true

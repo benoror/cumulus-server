@@ -40,9 +40,7 @@ const resolvers = lodash.assign(defaultResolvers, {
         {
           identityNumber: args.identityNumber
         },
-        lodash.assign(args, {
-          modifiedAt: Date.now(),
-        }),
+        args,
         {
           new: true,
           upsert: true
