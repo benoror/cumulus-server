@@ -1,4 +1,5 @@
 import Mongoose from 'mongoose';
+import versioning from './mongoose-plugins/versioning';
 
 const mongo = Mongoose.connect('mongodb://localhost/cumulus');
 
@@ -41,7 +42,7 @@ const PatientSchema = Mongoose.Schema({
   gender: String,
   address: String,
   address2: String,
-  zipcode: Number,
+  zipcode: String,
   city: String,
   state: String,
   country: String,
@@ -49,6 +50,8 @@ const PatientSchema = Mongoose.Schema({
 }, {
   timestamps: true
 });
+
+PatientSchema.plugin(versioning);
 
 const Patient = Mongoose.model('patients', PatientSchema);
 
