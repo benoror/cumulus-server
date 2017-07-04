@@ -1,6 +1,7 @@
 import { Patient } from '../connectors';
 import defaultResolvers from '../default/resolvers';
 import lodash from 'lodash';
+import upsert from '../upsert';
 
 const resolvers = lodash.assign(defaultResolvers, {
   Patient: {
@@ -36,16 +37,7 @@ const resolvers = lodash.assign(defaultResolvers, {
         args.insurance.claim = claim;
       }
 
-      return Patient.findOneAndUpdate(
-        {
-          identityNumber: args.identityNumber
-        },
-        args,
-        {
-          new: true,
-          upsert: true
-        }
-      );
+      return upsert(Patient, args);
     },
   },
 });
