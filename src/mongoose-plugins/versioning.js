@@ -1,4 +1,5 @@
 import lodash from 'lodash';
+import deep from 'deep-diff';
 
 module.exports = exports = function versioningPlugin(schema, options) {
   schema.add({
@@ -19,6 +20,15 @@ module.exports = exports = function versioningPlugin(schema, options) {
   schema.pre('save', function(next) {
     this._revision = lodash.isFinite(this._revision) ?
       this._revision + 1 : 0;
+
+    let current = lodash.pickBy(this.toObject(), (v, k) => {
+      return k !== '_history';
+    })
+
+    let last = this._history.pop();
+    if(last) {
+      this._history.push(deep(current, last));
+    }
 
     next();
   });
