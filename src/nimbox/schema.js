@@ -12,17 +12,21 @@ schema {
 
 type Query {
   patients(
-    identityNumber: String
+    identity_number: String
   ): [Patient]
 }
 
 type Patient {
   _id: ID!
   ${Patient}
-  insuranceAttributes: Insurance
+  person_attributes: PersonAttributes
 }
 
-type Insurance {
+type PersonAttributes {
+  insurance_attributes: InsuranceAttributes
+}
+
+type InsuranceAttributes {
   ${Insurance}
 }
 

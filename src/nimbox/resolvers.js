@@ -3,19 +3,56 @@ import defaultResolvers from '../default/resolvers';
 import lodash from 'lodash';
 import upsert from '../upsert';
 
+const caseConv = (obj, to) => {
+  const convert = (o) => {
+    return lodash.mapKeys(o, (v, k) => {
+      return lodash[`${to}Case`](k);
+    });
+  };
+
+  if(lodash.isArray(obj)) {
+    return lodash.map(obj, (o) => {
+      return convert(o.toObject(), to);
+    });
+  } else {
+    return convert(obj, to);
+  }
+}
+
 const resolvers = lodash.assign(defaultResolvers, {
-  Patient: {
-    insuranceAttributes: (_, args) => {
+  Query: {
+    patients: (_, args) => {
       /*
-       * Include insurance.claim as camelCased attributes
+       * ToDo: Map phone & phoneAlt to telephone & telephone2
        */
-      if(_.insurance && _.insurance.claim) {
-        lodash.forIn(_.insurance.claim, (v, k) => {
-          _.insurance['claim' + lodash.capitalize(k)] = v;
+      return Patient.find(caseConv(args, 'camel')).then((patients) => {
+        return caseConv(patients, 'snake');
+      });
+    }
+  },
+  Patient: {
+    person_attributes: (_, args) => {
+      if(_.insurance) {
+        if(_.insurance.claim) {
+          /*
+           * Include insurance.claim as snakeCased attributes
+           */
+          lodash.forIn(_.insurance.claim, (v, k) => {
+            _.insurance[`claim_${lodash.snakeCase(k)}`] = v;
+          });
+          // delete _.insurance.claim
+        }
+        /*
+         * snakeCased insurance attributes
+         */
+        _.insurance = lodash.mapKeys(_.insurance, (v, k) => {
+          return `insurance_${lodash.snakeCase(k)}`;
         });
-        // delete _.insurance.claim
       }
-      return _.insurance;
+
+      return {
+        insurance_attributes: _.insurance
+      };
     }
   },
   Mutation: {
