@@ -12,7 +12,9 @@ schema {
 }
 
 type Query {
-  patients: [Patient]
+  patients(
+    identityNumber: String
+  ): [Patient]
 }
 
 type Patient {
