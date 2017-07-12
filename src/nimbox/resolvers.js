@@ -6,7 +6,10 @@ import upsert from '../upsert';
 const caseConv = (obj, to) => {
   const convert = (o) => {
     return lodash.mapKeys(o, (v, k) => {
-      return lodash[`${to}Case`](k);
+      /*
+       * Convert keys except for the ones beginning with underscore '_'
+       */
+      return k[0] != '_' ? lodash[`${to}Case`](k) : k;
     });
   };
 
@@ -51,6 +54,7 @@ const resolvers = lodash.assign(defaultResolvers, {
       }
 
       return {
+        identity_number: _.identity_number,
         insurance_attributes: _.insurance
       };
     }

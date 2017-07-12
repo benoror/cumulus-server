@@ -18,11 +18,13 @@ type Query {
 
 type Patient {
   _id: ID!
+  _revision: Int!
   ${Patient}
   person_attributes: PersonAttributes
 }
 
 type PersonAttributes {
+  identity_number: String
   insurance_attributes: InsuranceAttributes
 }
 
